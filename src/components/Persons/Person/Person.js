@@ -1,13 +1,15 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import classes from './Person.module.css';
 import Aux from '../../../hoc/Aux'
+import withClass from '../../../hoc/withClass'
 
 class Person extends Component {
   render() {
 
   console.log('[Person.js] rendering...');
   return (
-    <Fragment>
+    <Aux>
       <p onClick={this.props.click} >
         I'm {this.props.name} and I'm {this.props.age} yers old!
       </p>
@@ -17,9 +19,16 @@ class Person extends Component {
         type="text"
         onChange={this.props.changed}
         value={this.props.name} />
-    </Fragment>
-        );
+    </Aux>
+    );
   }
 };
 
-export default Person;
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func
+};
+
+export default withClass(Person, classes.Person);
